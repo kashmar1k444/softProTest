@@ -28,21 +28,25 @@ const updateTodo = () => {
         <input type="checkbox" class="todo-item-complete" :checked="todo.completed"
             @change="store.dispatch('completeTodo', todo.id)">
         <div class="todo-item-content">
-            <p v-if="!updating" class="todo-item-title">{{ todo.title }}</p>
-            <input type="text" :class="`${updatingError ? 'todo-item-input error' : 'todo-item-input'}`" v-model="title"
-                v-else>
+            <transition name="op" mode="out-in">
+                <p v-if="!updating" class="todo-item-title">{{ todo.title }}</p>
+                <input type="text" :class="`${updatingError ? 'todo-item-input error' : 'todo-item-input'}`" v-model="title"
+                    v-else>
+            </transition>
         </div>
         <div class="todo-item-btns">
-            <button v-if="!updating" @click="updating = true">
-                <svg height="16px" width="16px" viewBox="0 0 512 512">
-                    <use href="../../public/update.svg#path"></use>
-                </svg>
-            </button>
-            <button v-else @click="updateTodo">
-                <svg height="16px" width="16px" viewBox="0 0 448 512">
-                    <use href="../../public/save.svg#path"></use>
-                </svg>
-            </button>
+            <transition name="btn" mode="out-in">
+                <button v-if="!updating" @click="updating = true">
+                    <svg height="16px" width="16px" viewBox="0 0 512 512">
+                        <use href="../../public/update.svg#path"></use>
+                    </svg>
+                </button>
+                <button v-else @click="updateTodo">
+                    <svg height="16px" width="16px" viewBox="0 0 448 512">
+                        <use href="../../public/save.svg#path"></use>
+                    </svg>
+                </button>
+            </transition>
             <button @click="store.dispatch('removeTodo', todo.id)">
                 <svg height="16px" width="16px" viewBox="0 0 384 512">
                     <use href="../../public/remove.svg#path"></use>
