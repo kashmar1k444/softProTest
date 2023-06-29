@@ -1,0 +1,264 @@
+$br-4: 4px;
+$pr-color: #eec26a;
+$red: #d65555;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input, button, select{
+    border: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+body{
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    background: #131313;
+    color: #fff;
+}
+
+.wrapper{
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+h1{
+    text-align: center;
+    margin-top: 60px;
+}
+
+
+
+.todo{
+    &-list{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        list-style: none;
+    }
+    &-item{
+        display: flex;
+        background: #000000;
+        height: 44px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px;
+        border-radius: $br-4;
+        &.completed{
+           background: #4c4c4c;
+           .todo-item-input {
+                background: #515151;
+           }
+        }
+        &-content{
+            width: 400px;
+        }
+        &-complete{
+            width: 16px;
+            height: 16px;
+        }
+        &-input{
+            background: #0a0a0a;
+            color: #fff;
+            height: 44px;
+            font-size: 20px;
+            width: 100%;
+            padding: 0 15px;
+            &.error{
+                border-bottom: 1px solid $red;
+            }
+        }
+        &-title{
+            font-size: 20px;
+            padding-left: 15px;
+        }
+        &-btns{
+            display: flex;
+            gap: 12px;
+            & button{
+                display: grid;
+                place-items: center;
+                width: 30px;
+                height: 30px;
+                border-radius: $br-4;
+                background: $pr-color;
+                cursor: pointer;
+            }
+        }
+    }
+    &-form{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 60px;
+        margin-bottom: 40px;
+        &-input{
+            position: relative;
+            & p {
+                position: absolute;
+                left: 0;
+                top: -20px;
+                font-size: 14px;
+                color: $red;
+            }
+        }
+        & input{
+            width: 400px;
+            height: 38px;
+            padding: 0 20px;
+            border-radius: $br-4 0 0 $br-4;
+        }
+        & button{
+            background: $pr-color;
+            width: 100px;
+            height: 38px;
+            border-radius: 0 $br-4 $br-4 0;
+            cursor: pointer;
+        }
+    }
+    &-stats{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 60px;
+        & select{
+            height: 38px;
+            padding: 0 20px;
+            border-radius: $br-4;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+        &-card{
+            p{  
+                font-size: 18px;
+                font-weight: 500;
+                text-align: center;
+                margin-bottom: 16px;
+            }
+            div{
+                display: flex;
+                background: $pr-color;
+                width: min-content;
+                height: 38px;
+                align-items: center;
+                margin: 0 auto;
+                padding: 0 12px;
+                border-radius: $br-4;
+                color: #000;
+            }
+        }
+    }
+}
+
+.list{
+    &-clear{
+        display: grid;
+        background: $red;
+        height: 60px;
+        width: 100%;
+        place-items: center;
+        border-radius: 14px;
+        font-size: 24px;
+        text-align: center;
+        margin-top: 60px;
+    }
+}
+
+
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+}
+
+
+
+.op-enter-active,
+.op-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.op-enter-from,
+.op-leave-to {
+  opacity: 0;
+}
+
+/* 1. declare transition */
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+/* 2. declare enter from and leave to state */
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scaleY(0.01) translate(30px, 0);
+}
+
+/* 3. ensure leaving items are taken out of layout flow so that moving
+      animations can be calculated correctly. */
+.fade-leave-active {
+  position: absolute;
+  width: 100%;
+}
+
+
+@media screen and (max-width: 700px) {
+
+    h1{
+        margin-top: 44px;
+    }
+
+    .todo{
+        &-item{
+            padding: 0 16px;
+            &-content{
+                width: 100%;
+                max-width: 400px;
+                margin: 0 16px;
+            }
+            &-title{
+                font-size: 16px;
+            }
+            &-input{
+                font-size: 16px;
+            }
+            &-btns{
+                button{
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+        &-form{
+            margin: 44px 0 44px;
+            & input{
+                width: 100%;
+            }
+        }
+        &-stats{
+            select{
+                padding: 0 10px;
+            }
+            &-card {
+                p{
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    .list-clear{
+        font-size: 22px;
+        height: 50px;
+        border-radius: $br-4;
+    }
+}
